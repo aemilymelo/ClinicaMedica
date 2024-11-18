@@ -75,7 +75,7 @@ Este projeto é um sistema de gestão para clínicas médicas, desenvolvido para
 
 ## **Estrutura do Projeto**
 ```
-clinic_management/
+service/
 ├── app.py                # Arquivo principal da aplicação
 ├── extensions.py         # Configuração de extensões
 ├── models.py             # Modelos de banco de dados
