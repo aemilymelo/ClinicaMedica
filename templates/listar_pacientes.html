@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Pacientes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lista_paciente.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <div class="list-container">
+            <h1>Pacientes</h1>
+            <a href="{{ url_for('paciente.adicionar_paciente') }}" class="btn btn-primary">Adicionar Novo Paciente</a>
+
+            <!-- Tabela de Listagem de Pacientes -->
+            <div class="table-responsive">
+                <table class="patient-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>Data de Nascimento</th>
+                            <th>Telefone</th>
+                            <th>Endereço</th>
+                            <th>Prontuários</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for paciente in pacientes %}
+                            <tr>
+                                <td>{{ paciente.nome }}</td>
+                                <td>{{ paciente.cpf }}</td>
+                                <td>{{ paciente.data_nascimento }}</td>
+                                <td>{{ paciente.telefone }}</td>
+                                <td>{{ paciente.endereco }}</td>
+                                <td>
+                                    <ul>
+                                        {% for prontuario in paciente.prontuarios %}
+                                            <li>
+                                                {{ prontuario.data }} - {{ prontuario.diagnostico }} 
+                                                <a href="{{ url_for('prontuario.listar_prontuarios', paciente_id=paciente.id) }}" class="ver-prontuarios-link">Ver Prontuários</a>
+                                            </li>
+                                        {% else %}
+                                            <li>Sem prontuários registrados</li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('paciente.atualizar_paciente', id=paciente.id) }}" class="btn btn-warning">Editar</a>
+                                    <form action="{{ url_for('paciente.deletar_paciente', id=paciente.id) }}" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja deletar este paciente?');">
+                                        <button type="submit" class="btn btn-danger">Deletar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Consulta</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/consulta.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <div class="form-container">
+            <h1>Registrar Consulta</h1>
+            <form method="post" class="form">
+                <div class="form-group">
+                    <label for="data">Data:</label>
+                    <input type="date" name="data" id="data" required>
+                </div>
+                <div class="form-group">
+                    <label for="paciente_id">Paciente:</label>
+                    <select name="paciente_id" id="paciente_id" required>
+                        {% for paciente in pacientes %}
+                        <option value="{{ paciente.id }}">{{ paciente.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="diagnostico">Diagnóstico:</label>
+                    <textarea name="diagnostico" id="diagnostico" rows="4" placeholder="Informe o diagnóstico"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="prescricoes">Prescrições:</label>
+                    <textarea name="prescricoes" id="prescricoes" rows="4" placeholder="Informe as prescrições"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Salvar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

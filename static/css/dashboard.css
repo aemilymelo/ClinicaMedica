@@ -1,0 +1,221 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fc;
+}
+
+/* Cabeçalho */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #0077b6;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo e título */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+}
+
+/* Navegação */
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #00b4d8;
+}
+
+/* Container principal com menu lateral e conteúdo */
+.container {
+    display: flex;
+    padding: 2rem;
+    flex-grow: 1; /* Garantir que o container ocupe o espaço disponível */
+}
+
+/* Menu Lateral */
+.sidebar {
+    width: 250px;
+    background-color: #fff;
+    color: #333;
+    padding: 20px;
+    height: 100vh;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center; /* Centraliza os itens no menu lateral */
+    border-radius: 5%;
+}
+
+/* Perfil do Médico */
+.profile {
+    text-align: center;
+    margin-bottom: 40px; /* Aumentando o espaço entre a foto e os dados */
+}
+
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid #0077b6;
+    margin-bottom: 20px; /* Espaço abaixo da foto */
+}
+
+.profile-info h2 {
+    font-size: 18px;
+    color: #0077b6;
+    margin-bottom: 10px; /* Aumentando o espaço entre nome e dados */
+}
+
+.profile-info p {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Menu de links */
+.menu {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    text-align: center; /* Centraliza os links */
+}
+
+.menu li {
+    margin: 20px 0;
+}
+
+.menu li a {
+    color: #0077b6;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.menu li a:hover {
+    background-color: #0077b6;
+    color: white;
+}
+
+
+/* Conteúdo Principal */
+.main-content {
+    flex: 1;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
+}
+
+/* Título da Página */
+h1 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Opções de conteúdo */
+.options {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.option {
+    background-color: #f0f4f8;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    position: relative;
+}
+
+.option:hover {
+    background-color: #f1f8e9;
+    transform: translateY(-5px);
+}
+
+.option h3 {
+    font-size: 24px;
+    color: #0077b6;
+    margin-bottom: 10px;
+    cursor: pointer; /* Tornando o título clicável */
+}
+
+.option p {
+    font-size: 16px;
+    color: #777;
+}
+
+/* Estilo do menu suspenso */
+.dropdown-menu {
+    display: none;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu a {
+    display: block;
+    color: #0077b6;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 5px 0;
+    transition: color 0.3s;
+}
+
+.dropdown-menu a:hover {
+    color: #00b4d8;
+}
+
+/* Exibir o dropdown quando clicado */
+.show-dropdown .dropdown-menu {
+    display: block;
+}
+
+

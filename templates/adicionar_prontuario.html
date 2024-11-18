@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Prontuário</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/prontuario.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Logo Clínica Médica">
+            <h1>Adicionar Prontuário</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('agendamento.listar_agendamentos') }}">Agendamentos</a></li>
+                <li><a href="{{ url_for('prontuario.listar_prontuarios') }}">Prontuários</a></li>
+                <li><a href="{{ url_for('paciente.listar_pacientes') }}">Pacientes</a></li>
+                <li><a href="{{ url_for('login.login') }}">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Adicionar Novo Prontuário</h2>
+
+        <form action="{{ url_for('prontuario.adicionar_prontuario') }}" method="POST">
+            <div class="form-group">
+                <label for="paciente_id">Paciente:</label>
+                <select class="form-control" id="paciente_id" name="paciente_id" required>
+                    {% for paciente in pacientes %}
+                    <option value="{{ paciente.id }}">{{ paciente.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="data">Data:</label>
+                <input type="date" class="form-control" id="data" name="data" required>
+            </div>
+
+            <div class="form-group">
+                <label for="diagnostico">Diagnóstico:</label>
+                <textarea class="form-control" id="diagnostico" name="diagnostico" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="prescricoes">Prescrições:</label>
+                <textarea class="form-control" id="prescricoes" name="prescricoes" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success">Adicionar Prontuário</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Clínica Médica. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

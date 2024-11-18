@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Médico</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+
+<body>
+    <!-- Menu Superior -->
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Logo Clínica Médica">
+            <h1>Clínica Médica</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Agendamentos</a></li>
+                <li><a href="#">Prontuários</a></li>
+                <li><a href="#">Pacientes</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Container com Menu Lateral e Conteúdo Principal -->
+    <div class="container">
+        <!-- Menu Lateral -->
+        <div class="sidebar">
+            <div class="profile">
+                <img src="{{ url_for('static', filename='img/usermedico.jpeg') }}" alt="Foto do Médico"
+                    class="profile-img">
+                <div class="profile-info">
+                    <h2>{{ medico.nome }}</h2>
+                    <p class="crm">{{ medico.crm }}</p>
+                    <p class="especialidade">{{ medico.especialidade }}</p>
+                </div>
+            </div>
+            <ul class="menu">
+                <li><a href="#">Horários</a></li>
+                <li><a href="#">Cancelar Consulta</a></li>
+                <li><a href="#">Pacientes</a></li>
+                <li><a href="#">Sair</a></li>
+
+            </ul>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <h1>Bem-vindo ao Painel do Médico</h1>
+            <div class="options">
+                <div class="option">
+                    <h3 class="dropdown-toggle">Prontuários</h3>
+                    <div class="dropdown-menu">
+                        <a href="#">Consultar Prontuário</a>
+                        <a href="#">Adicionar Prontuário</a>
+                        <a href="#">Editar Prontuário</a>
+                    </div>
+                </div>
+                <div class="option">
+                    <h3 class="dropdown-toggle">Relatórios</h3>
+                    <div class="dropdown-menu">
+                        <a href="#">Gerar Relatório</a>
+                        <a href="#">Visualizar Relatório</a>
+                        <a href="#">Exportar Relatório</a>
+                    </div>
+                </div>
+                <div class="option">
+                    <h3 class="dropdown-toggle">Pacientes</h3>
+                    <div class="dropdown-menu">
+                        <a href="#">Adicionar Paciente</a>
+                        <a href="#">Ver Pacientes</a>
+                        <a href="#">Editar Paciente</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+       
+
+        <script>
+            document.querySelectorAll('.option h3').forEach(item => {
+                item.addEventListener('click', () => {
+                    const parent = item.parentElement;
+                    parent.classList.toggle('show-dropdown');
+                });
+            });
+        </script>
+</body>
+
+</html>

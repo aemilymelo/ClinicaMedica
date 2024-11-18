@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Consultas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/consulta.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <h1>Consultas</h1>
+        <a href="{{ url_for('consulta.registrar_consulta') }}" class="add-btn">Registrar Consulta</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Paciente</th>
+                    <th>Diagnóstico</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for consulta in consultas %}
+                <tr>
+                    <td>{{ consulta.id }}</td>
+                    <td>{{ consulta.data.strftime('%d/%m/%Y') }}</td>
+                    <td>{{ consulta.paciente.nome }}</td>
+                    <td>{{ consulta.diagnostico }}</td>
+                    <td>
+                        <a href="{{ url_for('consulta.editar_consulta', id=consulta.id) }}" class="edit-btn">Editar</a>
+                        <a href="{{ url_for('consulta.visualizar_consulta', id=consulta.id) }}" class="view-btn">Visualizar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

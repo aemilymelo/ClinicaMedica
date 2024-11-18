@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Agendamentos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/agendamento.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <h1>Agendamentos</h1>
+        <div class="button-container">
+            <a href="{{ url_for('agendamento.adicionar_agendamento') }}" class="btn btn-primary">Adicionar Agendamento</a>
+        </div>
+        <table class="agendamentos-table">
+            <thead>
+                <tr>
+                    <th>Paciente</th>
+                    <th>Data e Hora</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for agendamento in agendamentos %}
+                <tr>
+                    <td>{{ agendamento.paciente.nome }}</td>
+                    <td>{{ agendamento.data_horario.strftime('%d/%m/%Y %H:%M') }}</td>
+                    <td>{{ agendamento.status }}</td>
+                    <td>
+                        <a href="{{ url_for('agendamento.editar_agendamento', id=agendamento.id) }}" class="btn btn-edit">Editar</a>
+                        <form action="{{ url_for('agendamento.deletar_agendamento', id=agendamento.id) }}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-delete">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

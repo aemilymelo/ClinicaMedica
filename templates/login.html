@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Médico</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo Clínica Médica">
+            <h1>Clínica Médica</h1>
+        </div>
+        <nav>
+            <div class="menu-toggle">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Agendamentos</a></li>
+                <li><a href="#">Prontuários</a></li>
+                <li><a href="#">Pacientes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Container de Login -->
+    <div class="login-wrapper">
+        <div class="login-container">
+            <!-- Lado Esquerdo: Imagem -->
+            <div class="login-image">
+                <img src="{{ url_for('static', filename='img/login.jpg') }}" alt="Ilustração Médica">
+            </div>
+
+            <!-- Lado Direito: Formulário de Login -->
+            <div class="login-form">
+                <h2>LOGIN</h2>
+                <form action="{{ url_for('login.login') }}" method="POST">
+                    <div class="input-group">
+                        <input type="text" id="username" name="username" placeholder="Usuario" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="password" name="password" placeholder="Senha" required>
+                    </div>
+                    <button type="submit">Entrar</button>
+                    <div class="login-options">
+                        <label><input type="checkbox"> Lembre de mim</label>
+                        <a href="#">Esqueceu sua senha?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Nome do Sistema. Todos os direitos reservados.</p>
+    </footer>
+</body>
+
+</html>
