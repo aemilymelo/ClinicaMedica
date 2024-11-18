@@ -65,30 +65,31 @@ Este projeto é um sistema de gestão para clínicas médicas, desenvolvido para
 
 ## **Como Usar**
 ### **Pacientes**
-1. Navegue até `/patients` para:
+1. Navegue até `/pacientes` para:
    - Cadastrar novos pacientes.
    - Listar, editar ou excluir pacientes existentes.
 
 ### **Consultas**
-1. (Funcionalidade planejada) Navegue até `/appointments` para agendar e visualizar consultas.
+1. (Funcionalidade planejada) Navegue até `/agendamentos` para agendar e visualizar consultas.
 
 
 ## **Estrutura do Projeto**
 ```
 clinic_management/
 ├── app.py                # Arquivo principal da aplicação
-├── extensions.py         # Configuração de extensões (ex: SQLAlchemy)
+├── extensions.py         # Configuração de extensões
 ├── models.py             # Modelos de banco de dados
 ├── controllers/          # Lógica dos controladores
-│   ├── patient_controller.py
-│   └── doctor_controller.py
+│   ├──
+    ├──paciente_controller.py
+│   └── 
 ├── templates/            # Templates HTML
-│   ├── home.html
-│   ├── patients.html
-│   └── edit_patient.html
+│   ├── index.html
+│   ├── 
+│   └── 
 ├── static/               # Arquivos estáticos (CSS, JS)
 ├── migrations/           # Migrações do banco de dados
-├── clinic.db             # Arquivo SQLite (gerado automaticamente)
+├── clinic.db             # Arquivo SQLite 
 └── README.md             # Documentação
 
 
