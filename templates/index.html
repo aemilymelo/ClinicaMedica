@@ -41,18 +41,7 @@
 
         <!-- Containers com opções clicáveis -->
         <section class="features">
-            <div class="feature">
-                <a href="{{ url_for('login.login') }}">
-                    <img src="{{ url_for('static', filename='img/agendamento.png') }}" alt="Agendamentos">
-                    <h3>Agendamentos</h3>
-                </a>
-            </div>
-            <div class="feature">
-                <a href="{{ url_for('login.login') }}">
-                    <img src="{{ url_for('static', filename='img/prontuario.png') }}" alt="Prontuários">
-                    <h3>Prontuários</h3>
-                </a>
-            </div>
+            
             <div class="feature">
                 <a href="{{ url_for('login.login') }}">
                     <img src="{{ url_for('static', filename='img/paciente.png') }}" alt="Pacientes">
@@ -63,7 +52,7 @@
                 <!-- Usando url_for para redirecionar para a rota de login -->
                 <a href="{{ url_for('login.login') }}">
                     <img src="{{ url_for('static', filename='img/medico.png') }}" alt="Login">
-                    <h3>Login</h3>
+                    <h3>Médico</h3>
                 </a>
             </div>
 

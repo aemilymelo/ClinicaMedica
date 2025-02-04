@@ -98,39 +98,52 @@ nav .menu-toggle div {
 }
 
 /* Seção de funcionalidades */
+/* Seção de funcionalidades */
 .features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
+    display: flex;
+    justify-content: center; /* Centraliza os itens */
+    gap: 2rem; /* Espaço entre os itens */
     padding: 2rem;
-    max-width: 1200px;
+    max-width: 800px; /* Ajusta a largura máxima para melhor alinhamento */
     margin: 0 auto;
 }
 
+/* Estilização de cada item (box) */
 .feature {
     background-color: white;
+    border: 2px solid #0077b6; /* Borda para destacar a caixa */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
+    padding: 1rem; /* Espaçamento interno */
+    width: 280px; /* Largura fixa */
 }
 
+/* Efeito ao passar o mouse */
 .feature:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
+/* Ajuste na imagem para ficar dentro da caixa */
 .feature img {
     width: 100%;
-    height: 240px;
-    object-fit: cover;
+    height: 180px; /* Reduz a altura da imagem */
+    object-fit: contain; /* Garante que a imagem fique bem ajustada */
+    background-color: #f8f9fa; /* Fundo para contraste */
+    padding: 10px;
 }
 
+/* Título dentro da caixa */
 .feature h3 {
     font-size: 1.2rem;
     color: #0077b6;
-    padding: 1rem;
+    padding: 1rem 0;
+    margin: 0;
+    background-color: #e3f2fd; /* Fundo azul claro para destaque */
+    border-top: 2px solid #0077b6; /* Linha separadora entre imagem e título */
 }
 
 
