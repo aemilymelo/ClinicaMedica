@@ -55,9 +55,9 @@
                 <div class="option">
                     <h3 class="dropdown-toggle">Prontuários</h3>
                     <div class="dropdown-menu">
-                        <a href="#">Consultar Prontuário</a>
-                        <a href="#">Adicionar Prontuário</a>
-                        <a href="#">Editar Prontuário</a>
+                        <a href="{{ url_for('prontuario.listar_prontuarios')}}">Consultar Prontuário</a>
+                        <a href="{{ url_for('prontuario.adicionar_prontuario')}}">Adicionar Prontuário</a>
+                        <a href="{{ url_for('prontuario.listar_prontuarios')}}">Editar Prontuário</a>
                     </div>
                 </div>
                 <div class="option">
@@ -71,9 +71,9 @@
                 <div class="option">
                     <h3 class="dropdown-toggle">Pacientes</h3>
                     <div class="dropdown-menu">
-                        <a href="#">Adicionar Paciente</a>
-                        <a href="#">Ver Pacientes</a>
-                        <a href="#">Editar Paciente</a>
+                        <a href="{{ url_for('paciente.adicionar_paciente')}}">Adicionar Paciente</a>
+                        <a href="{{ url_for('paciente.listar_pacientes')}}">Ver Pacientes</a>
+                        <a href="{{ url_for('paciente.listar_pacientes')}}">Editar Paciente</a>
                     </div>
                 </div>
             </div>

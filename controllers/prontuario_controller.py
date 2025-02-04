@@ -8,7 +8,7 @@ prontuario_bp = Blueprint('prontuario', __name__, url_prefix='/prontuarios')
 # Rota para listar prontuários
 @prontuario_bp.route('/')
 def listar_prontuarios():
-    prontuarios = Prontuario.query.all()  # Recuperando todos os prontuários do banco
+    prontuarios = Prontuario.query.all()
     return render_template('listar_prontuarios.html', prontuarios=prontuarios)
 
 # Rota para adicionar prontuário
@@ -20,7 +20,6 @@ def adicionar_prontuario():
         diagnostico = request.form['diagnostico']
         prescricoes = request.form['prescricoes']
 
-        # Convertendo a data de string para o tipo datetime.date
         data = datetime.strptime(data_str, '%Y-%m-%d').date()
 
         # Criando o novo prontuário
@@ -51,14 +50,12 @@ def editar_prontuario(id):
     if request.method == 'POST':
         prontuario.paciente_id = request.form['paciente_id']
         
-        # Convertendo a data de string para o tipo datetime.date
         data_str = request.form['data']
         prontuario.data = datetime.strptime(data_str, '%Y-%m-%d').date()
         
         prontuario.diagnostico = request.form['diagnostico']
         prontuario.prescricoes = request.form['prescricoes']
 
-        # Atualizando o banco de dados
         db.session.commit()
 
         flash('Prontuário atualizado com sucesso!', 'success')  # Mensagem de sucesso
@@ -71,7 +68,6 @@ def editar_prontuario(id):
 def deletar_prontuario(id):
     prontuario = Prontuario.query.get_or_404(id)  # Buscando o prontuário a ser deletado
 
-    # Removendo o prontuário do banco de dados
     db.session.delete(prontuario)
     db.session.commit()
 

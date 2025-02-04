@@ -1,7 +1,7 @@
 from flask import Flask, render_template
-from models import db # Certifique-se de importar a instância do SQLAlchemy
+from models import db
 from controllers.paciente_controller import paciente_bp
-from controllers.login_controller import login_bp  # Importando o Blueprint do login
+from controllers.login_controller import login_bp  
 from controllers.agendamento_controller import agendamento_bp
 from controllers.consulta_controller import consulta_bp
 from controllers.prontuario_controller import prontuario_bp
@@ -25,14 +25,11 @@ app.register_blueprint(consulta_bp)
 app.register_blueprint(prontuario_bp)
 
 
-
-
-
 @app.route('/')
 def home():
     return render_template('index.html')
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()  # Cria as tabelas se ainda não existirem
+        db.create_all()  # Cria as tabelas 
     app.run(debug=True)

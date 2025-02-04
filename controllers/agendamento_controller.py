@@ -20,7 +20,6 @@ def adicionar_agendamento():
         status = request.form.get('status', 'Pendente')
 
         try:
-            # Ajusta a conversão da data para o formato correto
             data_horario = datetime.strptime(data_horario, '%Y-%m-%dT%H:%M')
 
             novo_agendamento = Agendamento(
@@ -53,7 +52,6 @@ def editar_agendamento(id):
         status = request.form.get('status', 'Pendente')
 
         try:
-            # Ajusta a conversão da data para o formato correto
             agendamento.data_horario = datetime.strptime(data_horario, '%Y-%m-%dT%H:%M')  # Adiciona o formato com "T"
 
             agendamento.paciente_id = paciente_id
