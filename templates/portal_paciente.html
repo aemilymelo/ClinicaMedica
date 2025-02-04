@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal do Paciente</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+
+<body>
+    <!-- Menu Superior -->
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Logo Clínica Médica">
+            <h1>Clínica Médica</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Minhas Consultas</a></li>
+                <li><a href="#">Exames</a></li>
+                <li><a href="#">Receitas</a></li>
+                <li><a href="{{ url_for('loginpaciente.logout_paciente') }}">Sair</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Container com Menu Lateral e Conteúdo Principal -->
+    <div class="container">
+        <!-- Menu Lateral -->
+        <div class="sidebar">
+            <div class="profile">
+                <img src="{{ url_for('static', filename='img/usermulher.png') }}" alt="Foto do Paciente" class="profile-img">
+                <div class="profile-info">
+                    <h2>{{ paciente.nome }}</h2>
+                    <p class="idade">Idade: {{ paciente.idade }} anos</p>
+                    <p class="ultima-consulta">
+                        Última consulta: {% if paciente.prontuario %} {{ paciente.prontuario[-1].data }} {% else %} Nenhuma registrada {% endif %}
+                    </p>
+                </div>
+            </div>
+            <ul class="menu">
+                <li><a href="#">Consultas Agendadas</a></li>
+                <li><a href="#">Histórico Médico</a></li>
+                <li><a href="#">Atualizar Cadastro</a></li>
+                <li><a href="{{ url_for('loginpaciente.logout_paciente') }}">Sair</a></li>
+            </ul>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <h1>Bem-vindo, {{ paciente.nome }}!</h1>
+            <div class="options">
+                <div class="option">
+                    <h3 class="dropdown-toggle">Consultas</h3>
+                    <div class="dropdown-menu">
+                        <a href="#">Ver Consultas</a>
+                        <a href="#">Agendar Consulta</a>
+                        <a href="#">Cancelar Consulta</a>
+                    </div>
+                </div>
+                <div class="option">
+                    <h3 class="dropdown-toggle">Receitas</h3>
+                    <div class="dropdown-menu">
+                        <a href="#">Visualizar receitas</a>
+                        
+                    </div>
+                </div>
+                <div class="option">
+                    <h3 class="dropdown-toggle">Exames</h3>
+                    <div class="dropdown-menu">
+                        <a href="#">Visualizar Exames</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.option h3').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('show-dropdown');
+            });
+        });
+    </script>
+
+</body>
+
+</html>

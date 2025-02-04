@@ -2,10 +2,10 @@ from flask import Flask, render_template
 from models import db
 from controllers.paciente_controller import paciente_bp
 from controllers.login_controller import login_bp  
+from controllers.loginpaciente_controller import loginpaciente_bp  # Novo Blueprint!
 from controllers.agendamento_controller import agendamento_bp
 from controllers.consulta_controller import consulta_bp
 from controllers.prontuario_controller import prontuario_bp
-
 
 app = Flask(__name__)
 
@@ -17,13 +17,13 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Inicializando a instância do banco de dados com o app Flask
 db.init_app(app)
 
-# Registrando o Blueprint
+# Registrando os Blueprints
 app.register_blueprint(paciente_bp)
-app.register_blueprint(login_bp)
+app.register_blueprint(login_bp)  # Login médicos
+app.register_blueprint(loginpaciente_bp )  # Novo login de pacientes!
 app.register_blueprint(agendamento_bp)
 app.register_blueprint(consulta_bp)
 app.register_blueprint(prontuario_bp)
-
 
 @app.route('/')
 def home():
@@ -31,5 +31,5 @@ def home():
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()  # Cria as tabelas 
+        db.create_all()  # Cria as tabelas no banco de dados
     app.run(debug=True)
