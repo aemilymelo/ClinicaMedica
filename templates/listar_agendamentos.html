@@ -35,7 +35,7 @@
                     <tbody>
                         {% for agendamento in agendamentos %}
                         <tr>
-                            <td>{{ agendamento.id }}</td>
+                            <td>{{ agendamento.id or 'ERRO: ID NÃO DEFINIDO' }}</td>
                             <td>{{ agendamento.paciente.nome }}</td>
                             <td>{{ agendamento.data_horario.strftime('%d/%m/%Y %H:%M') }}</td>
                             <td>{{ agendamento.status }}</td>

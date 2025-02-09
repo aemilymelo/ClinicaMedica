@@ -21,10 +21,10 @@
                 <div></div>
             </div>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Agendamentos</a></li>
-                <li><a href="#">Prontuários</a></li>
-                <li><a href="#">Pacientes</a></li>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('agendamento.listar_agendamentos') }}">Agendamentos</a></li>
+                <li><a href="{{ url_for('prontuario.listar_prontuarios') }}">Prontuários</a></li>
+                <li><a href="{{ url_for('paciente.listar_pacientes') }}">Pacientes</a></li>
             </ul>
         </nav>
     </header>

@@ -59,6 +59,33 @@ def editar_agendamento(id):
 
     return render_template('editar_agendamento.html', agendamento=agendamento, pacientes=pacientes)
 
+@agendamento_bp.route('/<int:id>/atualizar', methods=['POST'])
+def atualizar_agendamento(id):
+    print(f"Chamando atualização para ID {id}")  # Debug
+
+    agendamento = Agendamento.query.get_or_404(id)
+    print(f"Agendamento encontrado: {agendamento}")  # Debug
+
+    try:
+        data_horario = request.form['data_horario']
+        status = request.form.get('status', 'Pendente')
+        print(f"Novo horário: {data_horario}, Novo status: {status}")  # Debug
+
+        agendamento.data_horario = datetime.strptime(data_horario, '%Y-%m-%dT%H:%M')
+        agendamento.status = status
+
+        db.session.commit()
+        print("Atualização realizada com sucesso!")  # Debug
+        flash("Agendamento atualizado com sucesso!", "success")
+        return redirect(url_for('agendamento.listar_agendamentos'))
+    except Exception as e:
+        db.session.rollback()
+        print(f"Erro ao atualizar: {str(e)}")  # Debug
+        flash(f"Erro ao atualizar agendamento: {str(e)}", "error")
+        return redirect(url_for('agendamento.editar_agendamento', id=id))
+
+
+
 # Rota para deletar um agendamento
 @agendamento_bp.route('/<int:id>/deletar', methods=['POST'])
 def deletar_agendamento(id):
