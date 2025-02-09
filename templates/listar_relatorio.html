@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Relatórios</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lista_paciente.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <div class="list-container">
+            <h1>Relatórios</h1>
+            <a href="{{ url_for('relatorio.adicionar_relatorio') }}" class="btn btn-primary">Adicionar Novo Relatório</a>
+
+            <!-- Tabela de Listagem de Relatórios -->
+            <div class="table-responsive">
+                <table class="patient-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>Data de Nascimento</th>
+                            <th>Telefone</th>
+                            <th>Endereço</th>
+                            <th>Histórico</th>
+                            <th>Queixa</th>
+                            <th>Exames</th>
+                            <th>Diagnóstico</th>
+                            <th>Tratamento</th>
+                            <th>Recomendações</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for relatorio in relatorios %}
+                            <tr>
+                                <td>{{ relatorio.nome }}</td>
+                                <td>{{ relatorio.cpf }}</td>
+                                <td>{{ relatorio.data_nascimento.strftime('%d/%m/%Y') }}</td>
+                                <td>{{ relatorio.telefone }}</td>
+                                <td>{{ relatorio.endereco }}</td>
+                                <td>{{ relatorio.historico or 'Não informado' }}</td>
+                                <td>{{ relatorio.queixa or 'Não informado' }}</td>
+                                <td>{{ relatorio.exames or 'Não informado' }}</td>
+                                <td>{{ relatorio.diagnostico or 'Não informado' }}</td>
+                                <td>{{ relatorio.tratamento or 'Não informado' }}</td>
+                                <td>{{ relatorio.recomendacoes or 'Não informado' }}</td>
+                                <td>
+                                    <a href="{{ url_for('relatorio.atualizar_relatorio', id=relatorio.id) }}" class="btn btn-warning">Editar</a>
+                                    <form action="{{ url_for('relatorio.deletar_relatorio', id=relatorio.id) }}" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja deletar este relatório?');">
+                                        <button type="submit" class="btn btn-danger">Deletar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+                <button type="button" class="btn btn-secondary" onclick="history.back()">Voltar</button>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

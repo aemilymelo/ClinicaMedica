@@ -3,40 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listar Agendamentos</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/agendamento.css') }}">
+    <title>Lista de Agendamentos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lista_agendamento.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="page-container">
-        <h1>Agendamentos</h1>
-        <div class="button-container">
-            <a href="{{ url_for('agendamento.adicionar_agendamento') }}" class="btn btn-primary">Adicionar Agendamento</a>
+        <div class="list-container">
+            <h1>Lista de Agendamentos</h1>
+            <a href="{{ url_for('agendamento.adicionar_agendamento') }}" class="btn btn-primary">Novo Agendamento</a>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <div class="table-responsive">
+                <table class="appointment-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Paciente</th>
+                            <th>Data e Hora</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for agendamento in agendamentos %}
+                        <tr>
+                            <td>{{ agendamento.id }}</td>
+                            <td>{{ agendamento.paciente.nome }}</td>
+                            <td>{{ agendamento.data_horario.strftime('%d/%m/%Y %H:%M') }}</td>
+                            <td>{{ agendamento.status }}</td>
+                            <td>
+                                <a href="{{ url_for('agendamento.editar_agendamento', id=agendamento.id) }}" class="btn btn-warning">Editar</a>
+                                <form action="{{ url_for('agendamento.deletar_agendamento', id=agendamento.id) }}" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este agendamento?');">
+                                    <button type="submit" class="btn btn-danger">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-secondary" onclick="history.back()">Voltar</button>
+            </div>
         </div>
-        <table class="agendamentos-table">
-            <thead>
-                <tr>
-                    <th>Paciente</th>
-                    <th>Data e Hora</th>
-                    <th>Status</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for agendamento in agendamentos %}
-                <tr>
-                    <td>{{ agendamento.paciente.nome }}</td>
-                    <td>{{ agendamento.data_horario.strftime('%d/%m/%Y %H:%M') }}</td>
-                    <td>{{ agendamento.status }}</td>
-                    <td>
-                        <a href="{{ url_for('agendamento.editar_agendamento', id=agendamento.id) }}" class="btn btn-edit">Editar</a>
-                        <form action="{{ url_for('agendamento.deletar_agendamento', id=agendamento.id) }}" method="post" style="display:inline;">
-                            <button type="submit" class="btn btn-delete">Deletar</button>
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
     </div>
+    
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    
 </body>
 </html>

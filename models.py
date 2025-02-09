@@ -1,4 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.schema import UniqueConstraint
+
 
 db = SQLAlchemy()
 
@@ -52,5 +54,20 @@ class Medico(db.Model):
     nome = db.Column(db.String(120), nullable=False)
     especialidade = db.Column(db.String(100))
     
-    
 
+# Modelo para a tabela Relatorio
+class Relatorio(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(120), nullable=False)
+    cpf = db.Column(db.String(11), unique=True, nullable=False)
+    data_nascimento = db.Column(db.Date, nullable=False)
+    telefone = db.Column(db.String(15))
+    endereco = db.Column(db.String(255))
+    historico = db.Column(db.Text)  # Campo para histórico médico
+    queixa = db.Column(db.Text)  # Campo para queixa principal
+    exames = db.Column(db.Text)  # Campo para exames realizados
+    diagnostico = db.Column(db.Text)  # Campo para diagnóstico
+    tratamento = db.Column(db.Text)  # Campo para tratamento
+    recomendacoes = db.Column(db.Text)  # Campo para recomendações
+
+    

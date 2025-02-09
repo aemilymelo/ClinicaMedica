@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Relatório</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/editmaior.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Editar Relatório</h1>
+        <form method="post" class="form">
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" id="nome" value="{{ relatorio.nome }}" required><br>
+
+            <label for="cpf">CPF:</label>
+            <input type="text" name="cpf" id="cpf" value="{{ relatorio.cpf }}" required><br>
+
+            <label for="data_nascimento">Data de Nascimento:</label>
+            <input type="date" name="data_nascimento" id="data_nascimento" value="{{ relatorio.data_nascimento }}" required><br>
+
+            <label for="telefone">Telefone:</label>
+            <input type="text" name="telefone" id="telefone" value="{{ relatorio.telefone }}"><br>
+
+            <label for="endereco">Endereço:</label>
+            <input type="text" name="endereco" id="endereco" value="{{ relatorio.endereco }}"><br>
+
+            <label for="historico">Histórico:</label>
+            <textarea name="historico" id="historico">{{ relatorio.historico }}</textarea><br>
+
+            <label for="queixa">Queixa:</label>
+            <textarea name="queixa" id="queixa">{{ relatorio.queixa }}</textarea><br>
+
+            <label for="exames">Exames:</label>
+            <textarea name="exames" id="exames">{{ relatorio.exames }}</textarea><br>
+
+            <label for="diagnostico">Diagnóstico:</label>
+            <textarea name="diagnostico" id="diagnostico">{{ relatorio.diagnostico }}</textarea><br>
+
+            <label for="tratamento">Tratamento:</label>
+            <textarea name="tratamento" id="tratamento">{{ relatorio.tratamento }}</textarea><br>
+
+            <label for="recomendacoes">Recomendações:</label>
+            <textarea name="recomendacoes" id="recomendacoes">{{ relatorio.recomendacoes }}</textarea><br>
+
+            <button type="submit" class="submit-btn">Salvar</button>
+            <button type="button" class="btn btn-secondary" onclick="history.back()">Voltar</button>
+
+        </form>
+    </div>
+</body>
+</html>

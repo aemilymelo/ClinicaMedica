@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Paciente</title>
+    <title> Relatórios</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/paciente.css') }}">
 </head>
 <body>
     <div class="page-container">
         <div class="form-container">
-            <h1>Adicionar Paciente</h1>
+            <h1>Adicionar Relatório</h1>
             <form method="post" class="form">
                 <div class="form-group">
                     <label for="nome">Nome:</label>
@@ -36,7 +36,44 @@
                     <input type="text" name="endereco" id="endereco" placeholder="Digite o endereço">
                 </div>
 
+                <div class="form-group">
+                    <label for="endereco">Histórico Médico:</label>
+                    <input type="text" name="historico" id="historico" placeholder="Digite o historio médico do paciente">
+                </div>
+                
+                <div class="form-group">
+                    <label for="endereco">Queixa Principal:</label>
+                    <input type="text" name="queixa" id="queixa" placeholder="Digite a queixa do paciente">
+                </div>
+
+                
+                <div class="form-group">
+                    <label for="endereco">Exames Realizados:</label>
+                    <input type="text" name="exames" id="exames" placeholder="Digite os exames realizados do paciente">
+                </div>
+
+                
+                <div class="form-group">
+                    <label for="endereco">Diagnóstico:</label>
+                    <input type="text" name="diagnostico" id="diagnostico" placeholder="Digite o diagnostico ">
+                </div>
+
+                
+                <div class="form-group">
+                    <label for="endereco">Tratamento:</label>
+                    <input type="text" name="tratamento" id="tratamento" placeholder="Digite o tratamento necessário">
+                </div>
+
+                
+                <div class="form-group">
+                    <label for="endereco">Recomendações:</label>
+                    <input type="text" name="Recomendacoes" id="recomendacoes" placeholder="Digite as recomendações">
+                </div>
+
+                
+
                 <button type="submit" class="submit-btn">Salvar</button>
+                
                 <button type="button" class="btn btn-secondary" onclick="history.back()">Voltar</button>
 
             </form>

@@ -19,9 +19,9 @@
             <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Agendamentos</a></li>
-                <li><a href="#">Prontuários</a></li>
-                <li><a href="#">Pacientes</a></li>
-                <li><a href="#">Login</a></li>
+                <li><a href="{{ url_for('prontuario.listar_prontuarios')}}">Prontuários</a></li>
+                <li><a href="{{ url_for('paciente.listar_pacientes')}}">Pacientes</a></li>
+                <li><a href="{{ url_for('login.login') }}">Login</a></li>
             </ul>
         </nav>
     </header>
@@ -31,7 +31,7 @@
         <!-- Menu Lateral -->
         <div class="sidebar">
             <div class="profile">
-                <img src="{{ url_for('static', filename='img/usermedico.jpeg') }}" alt="Foto do Médico"
+                <img src="{{ url_for('static', filename='img/usermulher.png') }}" alt="Foto do Médico"
                     class="profile-img">
                 <div class="profile-info">
                     <h2>{{ medico.nome }}</h2>
@@ -41,10 +41,10 @@
             </div>
             <ul class="menu">
                 <li><a href="#">Horários</a></li>
-                <li><a href="#">Cancelar Consulta</a></li>
-                <li><a href="#">Pacientes</a></li>
+                <li><a href="{{ url_for('agendamento.listar_agendamentos')}}">Cancelar Consulta</a></li>
+                <li><a href="{{ url_for('paciente.listar_pacientes')}}">Pacientes</a></li>
                 <li><a href="{{ url_for('login.logout_medico') }}">Sair</a></li>  <!-- 🔹 Adicionado -->
-
+                
             </ul>
         </div>
 
@@ -63,9 +63,9 @@
                 <div class="option">
                     <h3 class="dropdown-toggle">Relatórios</h3>
                     <div class="dropdown-menu">
-                        <a href="#">Gerar Relatório</a>
-                        <a href="#">Visualizar Relatório</a>
-                        <a href="#">Exportar Relatório</a>
+                        <a href="{{ url_for('relatorio.adicionar_relatorio') }}">Adicionar Relatório</a>
+                        <a href="{{ url_for('relatorio.listar_relatorios') }}">Listar Relatórios</a>
+                        <a href="{{ url_for('relatorio.listar_relatorios') }}">Editar Relatório</a>
                     </div>
                 </div>
                 <div class="option">
@@ -80,7 +80,8 @@
         </div>
 
 
-       
+        <button type="button" class="btn btn-secondary" onclick="history.back()">Voltar</button>
+
 
         <script>
             document.querySelectorAll('.option h3').forEach(item => {

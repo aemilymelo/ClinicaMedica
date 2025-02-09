@@ -45,4 +45,4 @@ def dashboard():
 @login_bp.route('/logout_medico')
 def logout_medico():
     session.pop('medico', None)  # 🔹 Remove o médico da sessão
-    return redirect(url_for('index.html'))
+    return redirect(url_for('login.login'))

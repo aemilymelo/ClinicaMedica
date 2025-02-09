@@ -154,3 +154,21 @@ select:focus, input:focus {
 .submit-btn:hover {
     background-color: #00b4d8;
 }
+
+.btn-secondary {
+    background-color: #65a1d6;
+    color: white;
+    font-size: 1rem;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: center;
+    max-width: 150px;
+    text-align: center;
+}
+
+.btn-secondary:hover {
+    background-color: #272b2e;
+}

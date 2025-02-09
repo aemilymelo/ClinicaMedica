@@ -7,7 +7,7 @@ agendamento_bp = Blueprint('agendamento', __name__, url_prefix='/agendamentos')
 # Rota para listar agendamentos
 @agendamento_bp.route('/')
 def listar_agendamentos():
-    agendamentos = Agendamento.query.order_by(Agendamento.data_horario.asc()).all()
+    agendamentos = Agendamento.query.all()
     return render_template('listar_agendamentos.html', agendamentos=agendamentos)
 
 # Rota para adicionar um novo agendamento
@@ -15,30 +15,27 @@ def listar_agendamentos():
 def adicionar_agendamento():
     pacientes = Paciente.query.all()
     if request.method == 'POST':
-        data_horario = request.form['data_horario']
         paciente_id = request.form['paciente_id']
+        data_horario = request.form['data_horario']
         status = request.form.get('status', 'Pendente')
 
+        novo_agendamento = Agendamento(
+            paciente_id=paciente_id,
+            data_horario=datetime.strptime(data_horario, '%Y-%m-%dT%H:%M'),
+            status=status
+        )
+
         try:
-            data_horario = datetime.strptime(data_horario, '%Y-%m-%dT%H:%M')
-
-            novo_agendamento = Agendamento(
-                data_horario=data_horario,
-                paciente_id=paciente_id,
-                status=status
-            )
-
             db.session.add(novo_agendamento)
             db.session.commit()
-            flash('Agendamento adicionado com sucesso!', 'success')
+            flash('Agendamento realizado com sucesso!', 'success')
             return redirect(url_for('agendamento.listar_agendamentos'))
-        except ValueError:
-            flash('Formato de data inválido. Por favor, verifique o formato.', 'error')
         except Exception as e:
             db.session.rollback()
             flash(f'Erro ao adicionar agendamento: {str(e)}', 'error')
+            return redirect(url_for('agendamento.adicionar_agendamento'))
 
-    return render_template('adicionar_agendamento.html', pacientes=pacientes)
+    return render_template('adicionar_agendamentos.html', pacientes=pacientes)
 
 # Rota para editar um agendamento
 @agendamento_bp.route('/<int:id>/editar', methods=['GET', 'POST'])
@@ -47,24 +44,18 @@ def editar_agendamento(id):
     pacientes = Paciente.query.all()
 
     if request.method == 'POST':
-        data_horario = request.form['data_horario']
-        paciente_id = request.form['paciente_id']
-        status = request.form.get('status', 'Pendente')
+        agendamento.paciente_id = request.form['paciente_id']
+        agendamento.data_horario = datetime.strptime(request.form['data_horario'], '%Y-%m-%dT%H:%M')
+        agendamento.status = request.form.get('status', 'Pendente')
 
         try:
-            agendamento.data_horario = datetime.strptime(data_horario, '%Y-%m-%dT%H:%M')  # Adiciona o formato com "T"
-
-            agendamento.paciente_id = paciente_id
-            agendamento.status = status
-
             db.session.commit()
             flash('Agendamento atualizado com sucesso!', 'success')
             return redirect(url_for('agendamento.listar_agendamentos'))
-        except ValueError:
-            flash('Formato de data inválido. Por favor, verifique o formato.', 'error')
         except Exception as e:
             db.session.rollback()
             flash(f'Erro ao atualizar agendamento: {str(e)}', 'error')
+            return redirect(url_for('agendamento.editar_agendamento', id=id))
 
     return render_template('editar_agendamento.html', agendamento=agendamento, pacientes=pacientes)
 

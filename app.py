@@ -1,11 +1,14 @@
-from flask import Flask, render_template
+from flask import Flask, render_template 
+from flask_migrate import Migrate
 from models import db
 from controllers.paciente_controller import paciente_bp
 from controllers.login_controller import login_bp  
-from controllers.loginpaciente_controller import loginpaciente_bp  # Novo Blueprint!
+from controllers.loginpaciente_controller import loginpaciente_bp  
 from controllers.agendamento_controller import agendamento_bp
 from controllers.consulta_controller import consulta_bp
 from controllers.prontuario_controller import prontuario_bp
+from controllers.relatorios_controller import relatorio_bp
+
 
 app = Flask(__name__)
 
@@ -16,6 +19,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Inicializando a instância do banco de dados com o app Flask
 db.init_app(app)
+migrate = Migrate(app, db)  # Inicializa o Flask-Migrate
+
 
 # Registrando os Blueprints
 app.register_blueprint(paciente_bp)
@@ -24,6 +29,7 @@ app.register_blueprint(loginpaciente_bp )  # Novo login de pacientes!
 app.register_blueprint(agendamento_bp)
 app.register_blueprint(consulta_bp)
 app.register_blueprint(prontuario_bp)
+app.register_blueprint(relatorio_bp)
 
 @app.route('/')
 def home():

@@ -3,27 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Agendamento</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/agendamento.css') }}">
+    <title>Adicionar Agendamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/paciente.css') }}">
 </head>
 <body>
     <div class="page-container">
-        <h1>Adicionar Agendamento</h1>
-        <form method="POST">
-            <div class="form-group">
-                <label for="paciente_id">Paciente:</label>
-                <select name="paciente_id" id="paciente_id" required>
-                    {% for paciente in pacientes %}
-                        <option value="{{ paciente.id }}">{{ paciente.nome }}</option>
+        <div class="form-container">
+            <h1>Adicionar Agendamento</h1>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
                     {% endfor %}
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="data_horario">Data e Hora:</label>
-                <input type="datetime-local" name="data_horario" id="data_horario" required>
-            </div>
-            <button type="submit" class="submit-btn">Salvar</button>
-        </form>
+                {% endif %}
+            {% endwith %}
+            
+            <form action="{{ url_for('agendamento.adicionar_agendamento') }}" method="post" class="form">
+                <div class="form-group">
+                    <label for="paciente">Paciente:</label>
+                    <select name="paciente_id" id="paciente" required>
+                        {% for paciente in pacientes %}
+                            <option value="{{ paciente.id }}">{{ paciente.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="data_horario">Data e Hora:</label>
+                    <input type="datetime-local" name="data_horario" id="data_horario" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="status">Status:</label>
+                    <select name="status" id="status">
+                        <option value="Pendente">Pendente</option>
+                        <option value="Confirmado">Confirmado</option>
+                        <option value="Cancelado">Cancelado</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="submit-btn">Adicionar</button>
+                <button type="button" class="btn btn-secondary" onclick="history.back()">Cancelar</button>
+            </form>
+        </div>
     </div>
+    
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>

@@ -6,8 +6,9 @@ consulta_bp = Blueprint('consulta', __name__, url_prefix='/consultas')
 # Rota para listar consultas
 @consulta_bp.route('/')
 def listar_consultas():
-    consultas = Consulta.query.all()
-    return render_template('listar_consultas.html', consultas=consultas)
+    medico_id = request.args.get('medico_id')  # Assumindo que passamos o ID do médico autenticado
+    consultas = Consulta.query.join(Agendamento).filter(Agendamento.medico_id == medico_id).all()
+    return render_template('dashboard.html', consultas=consultas)
 
 # Rota para registrar uma consulta
 @consulta_bp.route('/novo', methods=['GET', 'POST'])
@@ -52,3 +53,21 @@ def editar_consulta(id):
             flash(f'Erro ao atualizar consulta: {str(e)}', 'error')
 
     return render_template('editar_consulta.html', consulta=consulta)
+
+# Rota para cancelar uma consulta
+@consulta_bp.route('/<int:id>/cancelar', methods=['POST'])
+def cancelar_consulta(id):
+    consulta = Consulta.query.get_or_404(id)
+    try:
+        consulta.status = "Cancelada"  # Em vez de deletar, alteramos o status
+        db.session.commit()
+        flash('Consulta cancelada com sucesso!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Erro ao cancelar consulta: {str(e)}', 'error')
+    return redirect(url_for('consulta.listar_consultas'))
+# Rota para visualizar detalhes de uma consulta
+@consulta_bp.route('/<int:id>')
+def visualizar_consulta(id):
+    consulta = Consulta.query.get_or_404(id)
+    return render_template('visualizar_consulta.html', consulta=consulta)
